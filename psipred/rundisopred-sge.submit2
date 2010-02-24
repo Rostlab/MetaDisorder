@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#$ -S /bin/sh
+#$ -cwd
+#$ -j y
+#$ -o sge-rundisopred.out
+
+/nfs/home1/schles/psipred/rundisopred-temp2 DP00012.f
+
+
+

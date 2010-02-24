@@ -1,0 +1,68 @@
+#!/bin/tcsh
+
+# This is a simple script which will carry out all of the basic steps
+# required to make a DISOPRED prediction. Note that it assumes that the
+# following programs are in the appropriate directories:
+# blastpgp - PSIBLAST executable (from NCBI toolkit)
+# makemat - IMPALA utility (from NCBI toolkit)
+# psipred - PSIPRED V2 program
+# psipass2 - PSIPRED V2 program
+# disopred - DISOPRED program
+#
+# NOTE: This is very similar to the runpsipred script included in the PSIPRED
+# package.
+#
+
+# The name of the BLAST data bank
+set dbname = /data/blast/big ## dont forget to make it big!!!
+# Where the NCBI programs have been installed
+set ncbidir = /usr/pub/molbio/blast
+#set rundir = /nfs/home5/schles/md/psipred
+set rundir = .
+# Where the PSIPRED V2 programs have been installed
+#set execdir = /nfs/home5/schles/md/psipred/bin
+set execdir = $2/psipred/bin
+
+# Where the PSIPRED V2 data files have been installed
+#set datadir = ./data
+set datadir = $2/psipred/data
+set basename = $1:r
+set rootname = $basename:t
+set outname = $basename.chk
+
+\cp -f $1 $rundir/$rootname.f
+
+echo "Running PSI-BLAST with sequence" $1 "..."
+
+echo "$ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $rootname.f -C $rundir/$rootname.chk >& $rootname.blast" ##iteration should be 3
+$ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $rootname.f -C $rundir/$rootname.chk >& $rootname.blast ##iteration should be 3
+
+echo "Predicting secondary structure..."
+
+echo $rootname.chk > $rootname.pn
+echo $rootname.f > $rootname.sn
+$ncbidir/makemat -P $rundir/$rootname
+
+echo PSIPRED Pass1 ...
+
+$execdir/psipred $rootname.mtx $datadir/weights.dat $datadir/weights.dat2 $datadir/weights.dat3 $datadir/weights.dat4 > $rootname.ss
+echo "$execdir/psipred $rootname.mtx $datadir/weights.dat $datadir/weights.dat2 $datadir/weights.dat3 $datadir/weights.dat4 > $rootname.ss"
+echo PSIPRED Pass2  ...
+
+#$execdir/psipass2 $datadir/weights_p2.dat 1 1.0 1.3 $rootname.ss2 $rootname.ss > $rootname.horiz
+
+$execdir/psipass2 $datadir/weights_p2.dat 1 0.98 1.09 $rootname.ss2 $rootname.ss > $rootname.horiz
+
+echo Predicting disordered regions ...
+
+echo "$execdir/disopred $datadir/disoweights.dat $rootname.mtx $rootname.ss2 > $rootname.diso"
+#$execdir/disopred $datadir/disoweights.dat $rootname.mtx $rootname.ss2 > $rootname.diso
+$execdir/disopred /nfs/home5/schles/md/psipred/disoweights.dat $rootname.mtx $rootname.ss2 >$rootname.diso
+# Remove temporary files
+
+echo Cleaning up ...
+#\rm -f ./$rootname.* error.log
+echo "rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast"
+rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast
+echo "Final output files:" $rootname.ss2 $rootname.horiz $rootname.diso
+echo "Finished."

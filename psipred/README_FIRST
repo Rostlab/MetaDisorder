@@ -1,0 +1,23 @@
+DISOPRED V0.2
+=============
+
+To compile:
+
+cc -O disord_pred.c -lm -o disopred
+
+
+Usage:
+
+Input: test.fasta (protein sequence in FASTA format)
+Requires: PSIPRED to be installed
+
+rundisopred test.fasta
+
+
+NOTE rundisopred is a tcsh script analogous to the runpsipred script which is
+distributed with the PSIPRED package. It runs PSI-BLAST, PSIPRED and then
+DISOPRED to predict disordered regions. The end result is a PSIPRED secondary
+structure prediction plus a prediction of disorder.
+
+The pathname definitions in the script will have to be edited to define the
+local installation directories.

@@ -1,0 +1,6 @@
+##########################################################################
+#on 10/19/2007 similar to ucon2 but here I do not use PROFcon contact 	 #
+# prediction. Instead I use matrix-MJ-UR only under the assumption that  #
+#the probablity of interaction is 1. the gaussian function were inferred #
+# from the graph dist_randomMJ-perProt.                                  #
+##########################################################################
