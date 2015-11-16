@@ -8,15 +8,35 @@ prediction methods. In sustained cross-validation, MD not only outperforms its o
 to other state-of-the-art prediction methods in a variety of tests that we applied. MD is capable of predicting disordered 
 regions of all "flavors", and identifying new ones that are not captured by other predictors.
 
+## HOWTO Install
 
-**Development year:** 2010
+## HOWTO Run, Basics
 
-**Authors:** Markus Schmidberger and Guy Yachdav
+* Input
+* Output
+* Expected Results
+* ...
 
-**Languages:** perl
+## Method Description
 
-**Methodology used:**
+* Authors: Markus Schmidberger and Guy Yachdav
+* Development year: 2010
+* Languages: perl
+* Publications: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
+* Description (ML ? )
+* Training / Test Data
+* ...
 
-**Reference:** http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
+## Evaluation
+
+Perhaps:
+
+* Performance measures used (F1 ?, Accuracy ?, ROC Curve ?, ...)
+* Comparison with other tools
+* ...
+
+
+
+
 
 
