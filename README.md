@@ -8,7 +8,7 @@ prediction methods. In sustained cross-validation, MD not only outperforms its o
 to other state-of-the-art prediction methods in a variety of tests that we applied. MD is capable of predicting disordered 
 regions of all "flavors", and identifying new ones that are not captured by other predictors.
 
-##How to install the package
+##How to Install the Package
 
     sudo apt-get install python-software-properties
     sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
@@ -26,15 +26,9 @@ metadisorder [OPTION]
 * Development year: 2010
 * Languages: perl
 * Publications: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
-* Description (ML ? )
-* Training / Test Data
-* ...
+* Output format: Self-annotating, see example outputs in /usr/share/metadisorder/example.
 
-
-Output format
-Self-annotating, see example outputs in /usr/share/metadisorder/example.
-
-##OPTIONS
+##Options
 
         chk 
          Path to psiblast checkpoint file for fasta input. Required.
@@ -75,7 +69,7 @@ Self-annotating, see example outputs in /usr/share/metadisorder/example.
          Work directory, optional. If not defined a temporary directory is used.
 
 
-##EXAMPLES
+##Examples
   
   Obtaining input files: see <https://rostlab.org/owiki/index.php/How_to_generate_an_HSSP_file_from_alignment>
 
@@ -88,7 +82,7 @@ Self-annotating, see example outputs in /usr/share/metadisorder/example.
 
     metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
 
-##ENVIRONMENT
+##Environment
   METADISORDERCONF
     Location of metadisorderrc configuration file to use overriding other configuration files
 
@@ -105,10 +99,10 @@ Self-annotating, see example outputs in /usr/share/metadisorder/example.
    $METADISORDERCONF
      If this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
 
-##RESTRICTIONS
+##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Autmatical generation of input files is not supported at present.  Let us know if you need this feature.
 
-##REFERENCES
+##References
 Schlessinger, A., Punta, M., Yachdav, G., Kajan, L., and Rost, B.
 (2009). Improved disorder prediction by combination of orthogonal
 approaches. PLoS ONE, 4(2), e4433.
