@@ -54,6 +54,7 @@ Schlessinger, A., Punta, M., Yachdav, G., Kajan, L., and Rost, B.
 approaches. PLoS ONE, 4(2), e4433.
 
 OPTIONS
+
         chk 
          Path to psiblast checkpoint file for fasta input. Required.
 
@@ -77,20 +78,20 @@ OPTIONS
        profbval_raw
          Path to profbval prediction for fasta input. Use mode 5 of profbval.
 
-profcon
- Path to profcon prediction for fasta input
+        profcon
+          Path to profcon prediction for fasta input
 
-out 
- Path to output file
+        out 
+         Path to output file
 
-out_mode
- Output format: [0|1] DESCRIBE FORMATS HERE
+        out_mode
+          Output format: [0|1] DESCRIBE FORMATS HERE
 
---version
- Print version
+        --version
+         Print version
 
-workdir
- Work directory, optional. If not defined a temporary directory is used.
+        workdir
+         Work directory, optional. If not defined a temporary directory is used.
 
 
 EXAMPLES
@@ -99,29 +100,29 @@ EXAMPLES
 
   Example without profcon input:
 
-metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval
-norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk out=tmdfast.noprofcon_mdisorder out_mode=1
+     fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval
+    norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk out=tmdfast.noprofcon_mdisorder out_mode=1
 
   Example with profcon input (please note: profcon is really slow and is known not to improve predictions     significantly):
 
-metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
+    metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
 
 ENVIRONMENT
-     METADISORDERCONF
-      Location of metadisorderrc configuration file to use overriding other configuration files
+  METADISORDERCONF
+    Location of metadisorderrc configuration file to use overriding other configuration files
 
-     FILES
-      /usr/share/metadisorder/metadisorderrc.default
-       Default configuration file. See this file for a description of the parameters.
+  FILES
+  /usr/share/metadisorder/metadisorderrc.default
+    Default configuration file. See this file for a description of the parameters.
 
-      /etc/metadisorderrc
-       System configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
+  /etc/metadisorderrc
+    System configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
 
-      ~/.metadisorderrc
-       User configuration file overriding values in /etc/metadisorderrc
+  ~/.metadisorderrc
+    User configuration file overriding values in /etc/metadisorderrc
 
-     $METADISORDERCONF
-      If this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
+   $METADISORDERCONF
+     If this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
 
 RESTRICTIONS
 Right now all input files must be given on the command line as you see in the examples. Autmatical generation of input files is not supported at present.  Let us know if you need this feature.
