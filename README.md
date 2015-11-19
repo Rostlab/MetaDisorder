@@ -10,12 +10,12 @@ regions of all "flavors", and identifying new ones that are not captured by othe
 
 ##How to install the package
 =============================================
-1)sudo apt-get install python-software-properties
-2)sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
-3)sudo apt-get update (ignore GPG error)
-4)sudo apt-get install rostlab-debian-keyring (without verification)
-5)sudo apt-get update
-6)sudo apt-get install metadisorder 
+ 1)sudo apt-get install python-software-properties
+ 2)sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
+ 3)sudo apt-get update (ignore GPG error)
+ 4)sudo apt-get install rostlab-debian-keyring (without verification)
+ 5)sudo apt-get update
+ 6)sudo apt-get install metadisorder 
 
 SYNOPSIS
 metadisorder [OPTION]
