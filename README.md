@@ -9,13 +9,13 @@ to other state-of-the-art prediction methods in a variety of tests that we appli
 regions of all "flavors", and identifying new ones that are not captured by other predictors.
 
 ##How to install the package
-=============================================
- *sudo apt-get install python-software-properties
- *sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
- *sudo apt-get update (ignore GPG error)
- *sudo apt-get install rostlab-debian-keyring (without verification)
- *sudo apt-get update
- *sudo apt-get install metadisorder 
+
+    sudo apt-get install python-software-properties
+    sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
+    sudo apt-get update (ignore GPG error)
+    sudo apt-get install rostlab-debian-keyring (without verification)
+    sudo apt-get update
+    sudo apt-get install metadisorder 
 
 SYNOPSIS
 metadisorder [OPTION]
