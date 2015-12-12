@@ -10,6 +10,8 @@ regions of all "flavors", and identifying new ones that are not captured by othe
 
 ##How to Install the Package
 
+    git clone https://github.com/Rostlab/MetaDisorder
+    cd MetaDisorder
     sudo apt-get install python-software-properties
     sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
     sudo apt-get update (ignore GPG error)
@@ -17,16 +19,46 @@ regions of all "flavors", and identifying new ones that are not captured by othe
     sudo apt-get update
     sudo apt-get install metadisorder 
 
-SYNOPSIS
-metadisorder [OPTION]
+## HOWTO Run, Basics
+
+* Usage: metadisorder [OPTION]
+    * In case of getting the error: "Can't locate Config/IniFiles.pm in @INC (you may need to install the Config::IniFiles module)", you can resolve it by executing the following command: **sudo cpan install Config::IniFiles**
+
+* Obtaining input files: https://rostlab.org/owiki/index.php/How_to_generate_an_HSSP_file_from_alignment
+
+* Example of how to run without profcon input:
+
+    metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval
+    norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk out=tmdfast.noprofcon_mdisorder out_mode=1
+
+* Example of how to run with profcon input (please note: profcon is really slow and is known not to improve predictions significantly):
+
+    metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
+
+* Output is specified by out='outputFileName'
+
+* Expected Results: The output file is self-annotating. It contains a table with the following information: 
+
+    * Number - residue number
+    * Residue - amino-acid type
+    * NORSnet - raw score by NORSnet (prediction of unstructured loops)
+    * NORS2st - two-state prediction by NORSnet; D=disordered
+    * PROFbval - raw score by PROFbval (prediction of residue flexibility from sequence)
+    * Bval2st - two-state prediction by PROFbval
+    * Ucon - raw score by Ucon (prediction of protein disorder using predicted internal contacts)
+    * Ucon2st - two-state prediction by Ucon
+    * MD - raw score by MD (prediction of protein disorder using orthogonal sources)
+    * MD_rel - reliability of the prediction by MD; values range from 0-9. 9=strong prediction
+    * MD2st - two-state prediction by MD
+    
+You can also see example outputs in /usr/share/metadisorder/example.
 
 ## Method Description
 
-* Authors: Markus Schmidberger and Guy Yachdav
-* Development year: 2010
-* Languages: perl
+* Authors: Avner Schlessinger, Marco Punta, Guy Yachdav, Laszlo Kajan, and Burkhard Rost
 * Publications: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
-* Output format: Self-annotating, see example outputs in /usr/share/metadisorder/example.
+* Year: 2009
+* Languages: perl
 
 ##Options
 
@@ -68,39 +100,17 @@ metadisorder [OPTION]
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
-
-##Examples
-  
-  Obtaining input files: see <https://rostlab.org/owiki/index.php/How_to_generate_an_HSSP_file_from_alignment>
-
-  Example without profcon input:
-
-     fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval
-    norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk out=tmdfast.noprofcon_mdisorder out_mode=1
-
-  Example with profcon input (please note: profcon is really slow and is known not to improve predictions     significantly):
-
-    metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
-
 ##Environment
-  METADISORDERCONF
-    Location of metadisorderrc configuration file to use overriding other configuration files
-
-  FILES
-  /usr/share/metadisorder/metadisorderrc.default
-    Default configuration file. See this file for a description of the parameters.
-
-  /etc/metadisorderrc
-    System configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
-
-  ~/.metadisorderrc
-    User configuration file overriding values in /etc/metadisorderrc
-
-   $METADISORDERCONF
-     If this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
+  
+* METADISORDERCONF - location of metadisorderrc configuration file to use overriding other configuration files
+* FILES
+    * /usr/share/metadisorder/metadisorderrc.default - default configuration file. See this file for a description of the parameters.
+    * /etc/metadisorderrc -system configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
+    * ~/.metadisorderrc - user configuration file overriding values in /etc/metadisorderrc
+    * $METADISORDERCONF - if this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
 
 ##Restrictions
-Right now all input files must be given on the command line as you see in the examples. Autmatical generation of input files is not supported at present.  Let us know if you need this feature.
+Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
 
 ##References
 Schlessinger, A., Punta, M., Yachdav, G., Kajan, L., and Rost, B.
