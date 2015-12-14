@@ -1,5 +1,5 @@
 #MetaDisorder
-
+MD, a novel META-Disorder prediction method that molds various sources of information predominantly obtained from orthogonal prediction methods which focus on different types of disordered regions.
 
 ##How to Install the Package
 
