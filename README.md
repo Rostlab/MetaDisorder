@@ -55,7 +55,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 * **Publications:** http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
 * **Year:** 2009
 * **Languages:** perl
-* ** Description:**Disordered proteins are highly abundant in regulatory processes such as transcription and cell-signaling. Different methods
+* ** Description:** Disordered proteins are highly abundant in regulatory processes such as transcription and cell-signaling. Different methods
 have been developed to predict protein disorder often focusing on different types of disordered regions.
 Here, we present MD, a novel META-Disorder prediction method that molds various sources of information predominantly obtained 
 from orthogonal prediction methods. MD significantly outperformed its constituents, and compared favorably to other top 
