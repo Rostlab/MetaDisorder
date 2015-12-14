@@ -24,15 +24,15 @@ regions of all "flavors", and identifying new ones that are not captured by othe
 * **Usage:** metadisorder [OPTION]
     * In case of getting the error: "Can't locate Config/IniFiles.pm in @INC (you may need to install the Config::IniFiles module)", you can resolve it by executing the following command: ```sudo cpan install Config::IniFiles```
 
-* **Obtaining input files:**  https://rostlab.org/owiki/index.php/How_to_generate_an_HSSP_file_from_alignment
+* **Obtaining Input Files:**  https://rostlab.org/owiki/index.php/How_to_generate_an_HSSP_file_from_alignment
 
-* **Example of how to run without profcon input:**
+* **Example of How to Run without Profcon Input:**
 
    ```
 metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval
     norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk out=tmdfast.noprofcon_mdisorder out_mode=1
 ```
-* **Example of how to run with profcon input:** (please note: profcon is really slow and is known not to improve predictions significantly):
+* **Example of How to Run with Profcon Input:** (please note: profcon is really slow and is known not to improve predictions significantly):
 ``` 
 metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1 
 ```
@@ -42,16 +42,16 @@ metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share
 * **Expected Results:** The output file is self-annotating. It contains a table with the following information: 
 
     * Number - residue number
-    * Residue - amino-acid type
-    * NORSnet - raw score by NORSnet (prediction of unstructured loops)
-    * NORS2st - two-state prediction by NORSnet; D=disordered
-    * PROFbval - raw score by PROFbval (prediction of residue flexibility from sequence)
-    * Bval2st - two-state prediction by PROFbval
-    * Ucon - raw score by Ucon (prediction of protein disorder using predicted internal contacts)
-    * Ucon2st - two-state prediction by Ucon
-    * MD - raw score by MD (prediction of protein disorder using orthogonal sources)
-    * MD_rel - reliability of the prediction by MD; values range from 0-9. 9=strong prediction
-    * MD2st - two-state prediction by MD
+    * Residue - *amino-acid type*
+    * NORSnet - *raw score by NORSnet (prediction of unstructured loops)*
+    * NORS2st - *two-state prediction by NORSnet; D=disordered*
+    * PROFbval - *raw score by PROFbval (prediction of residue flexibility from sequence)*
+    * Bval2st - *two-state prediction by PROFbval*
+    * Ucon - *raw score by Ucon (prediction of protein disorder using predicted internal contacts)*
+    * Ucon2st - *two-state prediction by Ucon*
+    * MD - *raw score by MD (prediction of protein disorder using orthogonal sources)*
+    * MD_rel - *reliability of the prediction by MD; values range from 0-9. 9=strong prediction*
+    * MD2st - *two-state prediction by MD*
     
 You can also see example outputs in **/usr/share/metadisorder/example**.
 
