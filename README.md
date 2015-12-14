@@ -106,7 +106,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
          Work directory, optional. If not defined a temporary directory is used.
 
 ###Environment
-  
+
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
 * **FILES**
     * **/usr/share/metadisorder/metadisorderrc.default** - default configuration file. See this file for a description of the parameters.
