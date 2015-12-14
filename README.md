@@ -42,7 +42,7 @@ metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share
 
 * **Expected Results:** The output file is self-annotating. It contains a table with the following information: 
 
-    * Number - residue number
+    * Number - *residue number*
     * Residue - *amino-acid type*
     * NORSnet - *raw score by NORSnet (prediction of unstructured loops)*
     * NORS2st - *two-state prediction by NORSnet; D=disordered*
