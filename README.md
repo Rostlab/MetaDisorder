@@ -63,7 +63,9 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 * Year: 2009
 * Languages: perl
 
-##Options
+##How To Run Extended
+
+###Options
 
         chk 
          Path to psiblast checkpoint file for fasta input. Required.
@@ -103,7 +105,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
-##Environment
+###Environment
   
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
 * **FILES**
