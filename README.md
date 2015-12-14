@@ -105,12 +105,12 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 
 ##Environment
   
-* METADISORDERCONF - location of metadisorderrc configuration file to use overriding other configuration files
-* FILES
-    * /usr/share/metadisorder/metadisorderrc.default - default configuration file. See this file for a description of the parameters.
-    * /etc/metadisorderrc -system configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
-    * ~/.metadisorderrc - user configuration file overriding values in /etc/metadisorderrc
-    * $METADISORDERCONF - if this environment variable is set ~/.metadisorderrc is disregarded and the value of the variable is read        for configuration options overriding /etc/metadisorderrc
+* **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
+* **FILES**
+    * */usr/share/metadisorder/metadisorderrc.default* - default configuration file. See this file for a description of the parameters.
+    * */etc/metadisorderrc* -system configuration file overriding values in /usr/share/metadisorder/metadisorderrc.default
+    * *~/.metadisorderrc* - user configuration file overriding values in /etc/metadisorderrc
+    * *$METADISORDERCONF* - if this environment variable is set `~/.metadisorderrc` is disregarded and the value of the variable is read for configuration options overriding */etc/metadisorderrc*
 
 ##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
