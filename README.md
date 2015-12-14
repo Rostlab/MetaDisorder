@@ -1,12 +1,5 @@
 #MetaDisorder
 
-Disordered proteins are highly abundant in regulatory processes such as transcription and cell-signaling. Different methods
-have been developed to predict protein disorder often focusing on different types of disordered regions.
-Here, we present MD, a novel META-Disorder prediction method that molds various sources of information predominantly obtained 
-from orthogonal prediction methods. MD significantly outperformed its constituents, and compared favorably to other top 
-prediction methods. In sustained cross-validation, MD not only outperforms its origins, but it also compares favorably 
-to other state-of-the-art prediction methods in a variety of tests that we applied. MD is capable of predicting disordered 
-regions of all "flavors", and identifying new ones that are not captured by other predictors.
 
 ##How to Install the Package
 
@@ -58,10 +51,18 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 
 ## Method Description
 
-* Authors: Avner Schlessinger, Marco Punta, Guy Yachdav, Laszlo Kajan, and Burkhard Rost
-* Publications: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
-* Year: 2009
-* Languages: perl
+* **Authors:** Avner Schlessinger, Marco Punta, Guy Yachdav, Laszlo Kajan, and Burkhard Rost
+* **Publications:** http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004433
+* **Year:** 2009
+* **Languages:** perl
+* ** Description:**Disordered proteins are highly abundant in regulatory processes such as transcription and cell-signaling. Different methods
+have been developed to predict protein disorder often focusing on different types of disordered regions.
+Here, we present MD, a novel META-Disorder prediction method that molds various sources of information predominantly obtained 
+from orthogonal prediction methods. MD significantly outperformed its constituents, and compared favorably to other top 
+prediction methods. In sustained cross-validation, MD not only outperforms its origins, but it also compares favorably 
+to other state-of-the-art prediction methods in a variety of tests that we applied. MD is capable of predicting disordered 
+regions of all "flavors", and identifying new ones that are not captured by other predictors.
+
 
 ##How To Run Extended
 
@@ -112,7 +113,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
     * **/usr/share/metadisorder/metadisorderrc.default** - default configuration file. See this file for a description of the parameters.
     * **/etc/metadisorderrc** -system configuration file overriding values in **/usr/share/metadisorder/metadisorderrc.default**
     * **~/.metadisorderrc** - user configuration file overriding values in **/etc/metadisorderrc**
-    * **$METADISORDERCONF** - if this environment variable is set **~/.metadisorderrc** is disregarded and the value of the variable is read for configuration options overriding **/etc/metadisorderrc**
+    * **$METADISORDERCONF** - if this environment variable is set **~/.metadisorderrc** is disregarded and the value of the variable is read for configuration options overriding **/etc/metadisorderrc**.
 
 ##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
