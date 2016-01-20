@@ -61,7 +61,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 
 ###Options
 
-        chk 
+       chk 
          Path to psiblast checkpoint file for fasta input. Required.
 
        debug
