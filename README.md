@@ -3,14 +3,16 @@ MD, a novel META-Disorder prediction method that molds various sources of inform
 
 ##How to Install the Package
 
-    git clone https://github.com/Rostlab/MetaDisorder
-    cd MetaDisorder
-    sudo apt-get install python-software-properties
-    sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
-    sudo apt-get update (ignore GPG error)
-    sudo apt-get install rostlab-debian-keyring (without verification)
-    sudo apt-get update
-    sudo apt-get install metadisorder 
+```shell
+git clone https://github.com/Rostlab/MetaDisorder
+cd MetaDisorder
+sudo apt-get install python-software-properties
+sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
+sudo apt-get update # ignore GPG error
+sudo apt-get install rostlab-debian-keyring # without verification
+sudo apt-get update
+sudo apt-get install metadisorder
+```
 
 ## How To Run, Basics
 
@@ -27,13 +29,13 @@ metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share
 ```
 * **Example of How to Run with Profcon Input:** (please note: profcon is really slow and is known not to improve predictions significantly):
 
-  ``` 
-metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1 
+  ```
+metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share/metadisorder/example/tmdfast.hsspPsiFil prof=/usr/share/metadisorder/example/tmdfast.rdbProf profbval_raw=/usr/share/metadisorder/example/tmdfast.profbval norsnet=/usr/share/metadisorder/example/tmdfast.norsnet chk=/usr/share/metadisorder/example/tmdfast.chk profcon=/usr/share/metadisorder/example/tmdfast.profcon out=tmdfast.profcon_mdisorder out_mode=1
   ```
 
 * **Output** is specified by out='outputFileName'
 
-* **Expected Results:** The output file is self-annotating. It contains a table with the following information: 
+* **Expected Results:** The output file is self-annotating. It contains a table with the following information:
 
     * Number - *residue number*
     * Residue - *amino-acid type*
@@ -46,7 +48,7 @@ metadisorder fasta=/usr/share/metadisorder/example/tmdfast.fasta hssp=/usr/share
     * MD - *raw score by MD (prediction of protein disorder using orthogonal sources)*
     * MD_rel - *reliability of the prediction by MD; values range from 0-9. 9=strong prediction*
     * MD2st - *two-state prediction by MD*
-    
+
 You can also see example outputs in **/usr/share/metadisorder/example**.
 
 ## Method Description
@@ -61,7 +63,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 
 ###Options
 
-       chk 
+       chk
          Path to psiblast checkpoint file for fasta input. Required.
 
        debug
@@ -72,7 +74,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
 
         -h, --help
 
-       hssp 
+       hssp
          Path to hssp file for fasta input. Required.
 
        norsnet
@@ -87,7 +89,7 @@ You can also see example outputs in **/usr/share/metadisorder/example**.
         profcon
           Path to profcon prediction for fasta input
 
-        out 
+        out
          Path to output file
 
         out_mode
@@ -115,7 +117,3 @@ Right now all input files must be given on the command line as you see in the ex
 Schlessinger, A., Punta, M., Yachdav, G., Kajan, L., and Rost, B.
 (2009). Improved disorder prediction by combination of orthogonal
 approaches. PLoS ONE, 4(2), e4433.
-
-
-
-
