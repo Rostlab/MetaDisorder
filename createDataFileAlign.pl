@@ -5,6 +5,7 @@ if (@ARGV<5)  {
 	die "\nUsage: perl createDataFilesAlign [id] [hssp] [prof] [work_dir] [root]\n";
 	}
 $id=$ARGV[0];$hsspfil=$ARGV[1];$prof=$ARGV[2];$tmp=$ARGV[3];$root=$ARGV[4];
+$prof="1ppt.f.rdbProf";
 $servers="$root/servers";
 $dataFile= "$tmp/$id.data";
 undef @res;undef @res;undef $end;undef@PREL; undef @PACC, undef @otL; undef @otE;

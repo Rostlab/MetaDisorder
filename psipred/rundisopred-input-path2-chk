@@ -33,7 +33,8 @@ set input_chk = $3
 set ncbidir = $4 # blast directory should be given by the user!
 #cp -f $3 $rootname.chk
 #\cp -f $1 $rundir/$rootname.f
-
+cp $input_chk .
+cp $1 .
 ###echo "Running PSI-BLAST with sequence" $1 "..." ## if chk file is not provided
 
 ###echo "$ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $rootname.f -C $rundir/$rootname.chk >& $rootname.blast" ##iteration should be 3 ### if chk file is not provided
@@ -41,12 +42,14 @@ set ncbidir = $4 # blast directory should be given by the user!
 
 echo "Predicting secondary structure..."
 echo $rootname.chk > $rootname.pn
+#echo $input_chk > $rootname.pn
 echo $rootname.f > $rootname.sn
-$ncbidir/makemat -P $rundir/$rootname
+makemat -P $rundir/$rootname
 
 echo PSIPRED Pass1 ...
 
-$execdir/psipred $rootname.mtx $datadir/weights.dat $datadir/weights.dat2 $datadir/weights.dat3 $datadir/weights.dat4 > $rootname.ss
+$execdir/psipred $rootname.mtx $datadir/weights.dat $datadir/weights.dat2 $datadir/weights.dat3 > $rootname.ss
+
 echo "$execdir/psipred $rootname.mtx $datadir/weights.dat $datadir/weights.dat2 $datadir/weights.dat3 $datadir/weights.dat4 > $rootname.ss"
 echo PSIPRED Pass2  ...
 
@@ -56,14 +59,17 @@ $execdir/psipass2 $datadir/weights_p2.dat 1 0.98 1.09 $rootname.ss2 $rootname.ss
 
 echo Predicting disordered regions ...
 
-echo "$execdir/disopred $datadir/disoweights.dat $rootname.mtx $rootname.ss2 > $rootname.diso"
+#echo "$execdir/disopred $datadir/disoweights.dat $rootname.mtx $rootname.ss2 > $rootname.diso"
 #$execdir/disopred $datadir/disoweights.dat $rootname.mtx $rootname.ss2 > $rootname.diso
-$execdir/disopred /nfs/home5/schles/md/psipred/disoweights.dat $rootname.mtx $rootname.ss2 >$rootname.diso
+disopred /usr/share/md-disopred/disoweights.dat $rootname.mtx $rootname.ss2 >$rootname.diso
 # Remove temporary files
 
 echo Cleaning up ...
 #\rm -f ./$rootname.* error.log
-echo "rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast"
-#rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast
+echo "rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast $rootname.f"
+#rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux ./$rootname.blast ./$rootname.aux $rootname.f
+rm ./$rootname.ss ./$rootname.ss2 ./$rootname.horiz ./$rootname.sn ./$rootname.pn ./$rootname.mtx ./$rootname.mn ./$rootname.chk ./$rootname.aux  $rootname.f
 echo "Final output files:" $rootname.ss2 $rootname.horiz $rootname.diso
 echo "Finished."
+echo "moving $rootname.diso to $5/"
+mv $rootname.diso $5/
