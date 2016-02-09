@@ -1,0 +1,171 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use Carp qw| cluck :DEFAULT |;
+use Getopt::Long qw(:config gnu_getopt auto_version auto_help);
+use Pod::Usage;
+use DBI;
+#use File::Temp qw||;
+use File::Path qw||;
+use IO::File;
+BEGIN { our $VERSION = "1.0"; }
+
+$ENV{'PATH'} = '/usr/bin:/bin';
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+our $opt;
+my $Lok = GetOptions( $opt = { datadir => '/mnt/project/rost_db/data/swissprot', 'table' => 'dbswiss', infile => '/mnt/project/rost_db/data/swissprot/uniprot_sprot.dat' },
+  'debug!',
+  'datadir|d=s',
+  'first20!',
+  'infile|i=s',
+  'man!',
+  'quiet!',
+  'readback!',
+  'table=s',
+  'workdir|w=s'
+);
+if( !$Lok ){ die("Invalid arguments, please check man page.\n"); }
+
+our $dbg = $opt->{debug};
+our $quiet = $opt->{quiet};
+
+if( $opt->{man} ){ pod2usage(-verbose => 2); }
+
+if( $opt->{table} =~ /[^a-z0-9_]/io ){ confess("invalid table name '$opt->{table}'"); }
+
+# lkajan: the below would be nice but perhaps because of the ACLs I get "Error in tempdir() using /mnt/project/rost_db/src/XXXXXXXXXX: Parent directory (/mnt/project/rost_db/src) is not writable" when it is in fact writable
+#my $workdir = $opt->{workdir} || File::Temp::tempdir( DIR => $opt->{datadir}, CLEANUP => !$dbg );
+my $CLEANUP = 0;
+my $workdir = $opt->{workdir};
+if( !$workdir ){ $CLEANUP = !$dbg; $workdir = `mktemp -d '$opt->{datadir}/XXXXXXXXXX'`; chomp( $workdir ); }
+
+END { if( $CLEANUP ){ File::Path::rmtree( $workdir ); } }
+
+#my $dbh = DBI->connect('DBI:DBM(RaiseError=1):type=GDBM_File;ext=;') || confess( $DBI::errstr );
+my $dbh = DBI->connect('DBI:DBM(RaiseError=1):type=DB_File;ext=;') || confess( $DBI::errstr );
+$dbh->{f_dir} = $workdir;
+
+if( $dbg ){ warn( "workdir = $workdir" ); }
+
+my $infh = IO::File->new( $opt->{infile}, 'r' ) || confess( "failed to open '$opt->{infile}': $!" );
+
+$dbh->do( "drop table if exists $opt->{table}");
+$dbh->do( "create table $opt->{table} ( id text, bytepos int )" ); # the value is the byte position where the record begins in the flat file
+
+my $count = 0;
+my $bytetop = 0;
+my $t0 = time();
+{
+  local $/ = "//\n";
+  while( my $rec = <$infh> )
+  {
+    #ID   002R_IIV3               Reviewed;         458 AA.
+    #ID   C108B_XENLA             Reviewed;         183 AA.
+    if( $rec !~ /^ID\s+(\w+)/o ){ confess("unrecognized record $count '$rec'"); }
+    my $id = lc($1);
+    $dbh->do("insert into $opt->{table} values ( ?, ? )", undef, $id, $bytetop );
+    if( $opt->{readback} )
+    {
+      my $rec = $dbh->selectrow_arrayref("select * from $opt->{table} where id = ?", undef, $id );
+      print STDERR ">>>$rec->[0] : $rec->[1]<<<\n";
+    }
+    #
+    ++$count;
+    $bytetop = tell( $infh );
+    if( $t0 != time() ){ $t0 = time(); _printcount( $count ); }
+    if( $opt->{first20} && $count > 20 ){ last; }
+  }
+  _printcount( $count ); if( !$main::quiet ){ print STDERR "\n"; }
+}
+
+$dbh->disconnect();
+
+# we are done, move the db files to their final destination
+my @resfiles = glob( "$workdir/*" );
+system( 'mv', "-t", "$opt->{datadir}", @resfiles ) && confess("failed to mv @resfiles to $opt->{datadir}");
+
+exit(0);
+
+sub               _printcount
+{
+  my( $__count ) = @_;
+  if( !$main::quiet ){ print STDERR `tput hpa 0`, `tput el`, $count; }
+}
+
+=pod
+
+=head1 NAME
+
+dbSwiss - create DBM version of Swiss-Prot data
+
+=head1 SYNOPSIS
+
+__pkgdatadir__/dbSwiss [OPTIONS]
+
+__pkgdatadir__/dbSwiss --datadir /data/swissprot --infile /data/swissprot/uniprot_sprot.dat
+
+__pkgdatadir__/dbSwiss [--help] [--man]
+
+=head1 DESCRIPTION
+
+dbSwiss creates DBM version of Swiss-Prot data.  This procedure is to replace splitSwiss.pl.  splitSwiss.pl saves Swiss-Prot records in separate files resulting in over 13 million relatively tiny files that take very long to create and rsync.  dbSwiss instead saves each record into a DBM database that is optimized for fast retrieval.
+
+=head1 OPTIONS
+
+=over
+
+=item -d, --datadir=I<path>
+
+directory of database files, default: '/mnt/project/rost_db/data/swissprot'
+
+=item --debug
+
+=item --nodebug
+
+=item --first20
+
+=item --nofirst20
+
+process only first 20 records, for debugging
+
+=item --help
+
+=item -i, --infile=I<path>
+
+Swiss-Prot data flatfile, default: '/mnt/project/rost_db/data/swissprot/uniprot_sprot.dat'.
+
+=item --man
+
+=item --quiet
+
+=item --noquiet
+
+do not print progress status
+
+=item --readback
+
+=item --noreadback
+
+read records back after storing and print them
+
+=item --table
+
+name of database table and consequently the base name of database files, default: 'dbswiss'
+
+=item --version
+
+=item -w, --workdir=I<path>
+
+Optional working directory. Automatically created and removed if not defined.
+
+=back
+
+=head1 AUTHOR
+
+Laszlo Kajan <lkajan@rostlab.org>
+
+=cut
+
+# vim:et:ts=2:ai:
+
