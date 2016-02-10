@@ -1,0 +1,8 @@
+######### running blast for tmpMD3006074; creating new HSSP and chk files########
+ ######### running ucon-noProfcon for tmpMD3006074 ########
+ ######### running disopred for tmpMD3006074 ########
+ ######### running profbval for tmpMD3006074 ########
+ ######### running norsnet for tmpMD3006074 ########
+ ######### running profcon for tmpMD3006074 ########
+ ######### running ucon using Profcon for tmpMD3006074 ########
+rm ./*tmpMD3006074*

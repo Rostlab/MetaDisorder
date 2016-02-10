@@ -6,7 +6,7 @@ use File::Copy;
 print_help()                 if ($#ARGV<0 || $ARGV[0]=~/^(-h|help|\?|def)$/i);
 
 $ENV{PP_MD}="~/MetaDisorder";
-$ENV{PP_BIN}="~/MetaDisorder/blast-2.2.25/bin/";
+$ENV{PP_BIN}="~/MetaDisorder/blast-2.2.25/bin";
 
 foreach $arg (@ARGV){
         #if    ($arg=~/^blast=(.*)$/)             { $fileInBlast =        $1;}

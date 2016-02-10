@@ -13,10 +13,9 @@ $file1= $root ."/"."prof/"."$id-fil.rdbProf";
 $saf=$root ."/".$id.".saf";
 #$hssp=$root ."/" .$id".hssp";
 $hssp=$root ."/".$id.".hssp";
-#$blastpgp=$root .$id .".blastpgp";;
-$blastpgp=$root ."/".$id .".blastpgp";;
+$blastpgp=$root .$id .".blastpgp";;
+#$blastpgp=$root ."/".$id .".blastpgp";;
 $chk=$root ."/".$id .".chk";;
-
 warn ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 system ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 
