@@ -129,7 +129,8 @@ MetaDisorder uses DisProt 3.4, which contains:
 
 ##Evaluation
 ![Tag](https://cloud.githubusercontent.com/assets/13695363/13203314/aa2cafe0-d8b5-11e5-9670-cabc664b4289.png)
-![Tag](https://cloud.githubusercontent.com/assets/13695363/13203315/aa2de428-d8b5-11e5-9f6f-f02e205cb078.png)
+
+The  Performance (TP are unstructured residues experimentally observed and correctly predicted; FP are structured residues that are predicted to be unstructured)
 
 ##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
