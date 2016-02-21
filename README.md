@@ -3,9 +3,6 @@ MD, a novel META-Disorder prediction method that molds various sources of inform
 
 ##How to Install the Package
 
-```shell
-git clone https://github.com/Rostlab/MetaDisorder
-cd MetaDisorder
 sudo apt-get install python-software-properties
 sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
 sudo apt-get update # ignore GPG error
@@ -103,6 +100,13 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
 
         workdir
          Work directory, optional. If not defined a temporary directory is used.
+
+##How to Install the Code 
+
+cd
+git clone https://github.com/Rostlab/MetaDisorder
+cd MetaDisorder
+perl runMD.pl fasta=tmdfast.fasta
 
 ###Environment
 
