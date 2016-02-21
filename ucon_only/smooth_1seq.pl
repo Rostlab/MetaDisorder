@@ -1,17 +1,17 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 use warnings;
 $id=$ARGV[0];$win=$ARGV[1];$work_dir=$ARGV[2];
-$fout="$work_dir/$id.ucon";
+$fout="$work_dir/$id.ucon_only";
 $file="$work_dir/$id.eprofcon";
 open (FILE, "$file") || die "cant open file $!";
 undef @disorder;
-undef @num;undef @e;undef @aa;undef @sum_e;undef @e_win;undef @hProb;undef @e1;
+undef @num;undef @e;undef @aa;undef @sum_e;undef @e_win;undef @hProb;undef @e1;;
 undef @seq;undef@num;#undef @frac;
 while ($line=<FILE>) {
 	$line=~ s/\n//;undef@info;
 	@info=split (/\t/,$line);
-	$aa=$info[1];$num=$info[0];$e=$info[2];#$hProb=$info[5];
-	push (@seq,$aa);push (@num,$num);push (@e,$e);#push (@hProb,$hProb/100);
+	$aa=$info[1];$num=$info[0];$e=$info[2];$hProb=$info[5];
+	push (@seq,$aa);push (@num,$num);push (@e,$e);push (@hProb,$hProb/100);
 	}
 close (FILE);
 #print FOUT "num\taa\te_no_smooth\te_win$win\n";
@@ -29,7 +29,7 @@ loop30:	for ($j=$st;$j<=$en;$j++) {
 		}
 	${$e_win{$win}}[$i]=${$sum_e{$win}}[$i]/${$count{$win}}[$i];
 	@e1=convert(\@{$e_win{$win}});
-	
+	#@
 	########old conversion to "probability" values
 	
 #########################################################################
@@ -51,11 +51,11 @@ loop30:	for ($j=$st;$j<=$en;$j++) {
 	#	$frac[$i]=helix_cont();
 	}
 open (FOUT,">$fout") || die "cant open $fout";
-printf FOUT "number\taa\te_win$win\tscore\n";
+printf FOUT "number\taa\te_win$win\te_win1\tscore_win$win\n";
 for ($i=0;$i<scalar@seq;$i++) {
 	$res_num=$i+1;
 	#printf FOUT "$res_num\t$seq[$i]\t$disorder[$x][$i]\t%1.2f\n",$e1[$i] ;
-	printf FOUT "$res_num\t$seq[$i]\t%1.4f\t%1.2f\n",${$e_win{$win}}[$i],$e1[$i]
+	printf FOUT "$res_num\t$seq[$i]\t%1.4f\t%1.4f\t%d\n",${$e_win{$win}}[$i], $e[$i],$e1[$i];
 	}
 	printf FOUT "END\n";
 close (FOUT);
@@ -95,28 +95,28 @@ loop32:		foreach $j (@limits) {
 		$frac=$helix_value/$count_win9;
 		return $frac;
 		}
-######## this function was changed on 10/19/2007 to correct the parameters
+
 sub convert {
 	my($ref) = shift;
         my(@e) = @{$ref};
 	my $c;my $geusO;my $geusDP;my @e1;
 	for ($c=0;$c<scalar@e;$c++) {
-		if ($e[$c]>=0.16) {
-			$e1[$c]=1;
+		if ($e[$c]>=0.47) {
+			$e1[$c]=0;
 			}
-		elsif ($e[$c]<0.-041) {
-			{  ##correction on 10/19/2007
-				$e1[$c]=2.58*$e[$c]+0.4046;
-                	        if ($e1[$c]<0){$e1[$c]= -($e1[$c]);}
-				}
-				
+		elsif ($e[$c]<0.25) {
+			 $e1[$c]=100;
 			}
-
+		
+		elsif (($e[$c]>=0.25) &&($e[$c]<0.37)) {
+			$e1[$c]=67;
+			}
 		else {
-			$geusO=0.077*exp(-($e[$c]+0.03)*($e[$c]+0.03)/0.0054);
-			$geusDP=0.06*exp(-($e[$c]-0.042)*($e[$c]-0.042)/0.0085);
-			$e1[$c]=$geusDP/($geusDP+$geusO);
+			$e1[$c]=33;
 			}
-		}
+		}			
 	return @e1;
 	}
+
+
+

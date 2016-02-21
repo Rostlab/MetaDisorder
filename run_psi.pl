@@ -20,6 +20,7 @@ $chk=$root ."/".$id .".chk";;
 warn ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 system ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 
+#Those directories should point lib-utils folder in the project
 warn (" perl librg-utils-perl/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
 system ("perl librg-utils-perl/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
 warn  ("perl librg-utils-perl/copf.pl exeConvertSeq=$ENVperl librg-utils-perl/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");

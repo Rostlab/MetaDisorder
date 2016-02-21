@@ -699,7 +699,7 @@ sub get_profbval {
 	my $num;my $node1;my $node2;my $muka;my $twostate;
        if (!(open (FILE, "$file"))) {
        		print "cant open $file killing the job$!";
-		rm_files($id);
+		#rm_files($id);
 		die;
 		}
 	for ($f=0; $f<43; $f++)  {
