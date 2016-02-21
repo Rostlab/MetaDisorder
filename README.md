@@ -120,6 +120,15 @@ perl runMD.pl fasta=tmdfast.fasta
     * **~/.metadisorderrc** - user configuration file overriding values in **/etc/metadisorderrc**
     * **$METADISORDERCONF** - if this environment variable is set **~/.metadisorderrc** is disregarded and the value of the variable is read for configuration options overriding **/etc/metadisorderrc**.
 
+##Training
+MetaDisorder uses DisProt 3.4, which contains:
+460 IDPs (intrinsically disordered proteins) 
+1103 disordered regions, encompassing 35 functional categories (all based on published experimental data)
+
+60 proteins with >780 residues were discarded as these could not be handled by all of the methods tested. From the remaining set, 17 more proteins crashed when applying at least one of the predictors in this study, and were also discarded.
+
+##Evaluation
+
 ##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
 
