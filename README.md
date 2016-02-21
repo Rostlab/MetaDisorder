@@ -4,8 +4,6 @@ MD, a novel META-Disorder prediction method that molds various sources of inform
 ##How to Install the Package
 
 ```shell
-git clone https://github.com/Rostlab/MetaDisorder
-cd MetaDisorder
 sudo apt-get install python-software-properties
 sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
 sudo apt-get update # ignore GPG error
@@ -104,6 +102,15 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
+##Installation from Repository
+[Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
+- Blast, individual compilation of Psipred and the executable of Disopred are required for the package. 
+```shell
+cd 
+git clone https://github.com/Rostlab/MetaDisorder
+cd MetaDisorder
+perl runMD.pl fasta=tmdfast.fasta
+```
 ###Environment
 
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
@@ -112,6 +119,15 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
     * **/etc/metadisorderrc** -system configuration file overriding values in **/usr/share/metadisorder/metadisorderrc.default**
     * **~/.metadisorderrc** - user configuration file overriding values in **/etc/metadisorderrc**
     * **$METADISORDERCONF** - if this environment variable is set **~/.metadisorderrc** is disregarded and the value of the variable is read for configuration options overriding **/etc/metadisorderrc**.
+
+##Training
+MetaDisorder uses DisProt 3.4, which contains:
+460 IDPs (intrinsically disordered proteins) 
+1103 disordered regions, encompassing 35 functional categories (all based on published experimental data)
+
+60 proteins with >780 residues were discarded as these could not be handled by all of the methods tested. From the remaining set, 17 more proteins crashed when applying at least one of the predictors in this study, and were also discarded.
+
+##Evaluation
 
 ##Restrictions
 Right now all input files must be given on the command line as you see in the examples. Automatical generation of input files is not supported at present.
