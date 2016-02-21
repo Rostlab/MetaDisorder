@@ -4,8 +4,6 @@ MD, a novel META-Disorder prediction method that molds various sources of inform
 ##How to Install the Package
 
 ```shell
-git clone https://github.com/Rostlab/MetaDisorder
-cd MetaDisorder
 sudo apt-get install python-software-properties
 sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
 sudo apt-get update # ignore GPG error
@@ -104,6 +102,15 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
+##Installation from Repository
+[Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
+- Blast, individual compilation of Psipred and the executable of Disopred are required for the package. 
+```shell
+cd 
+git clone https://github.com/Rostlab/MetaDisorder
+cd MetaDisorder
+perl runMD.pl fasta=tmdfast.fasta
+```
 ###Environment
 
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
