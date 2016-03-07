@@ -11,6 +11,15 @@ sudo apt-get install rostlab-debian-keyring # without verification
 sudo apt-get update
 sudo apt-get install metadisorder
 ```
+or 
+```shell
+cd 
+git clone https://github.com/Rostlab/MetaDisorder
+cd MetaDisorder
+perl runMD.pl fasta=tmdfast.fasta
+```
+[Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
+- Blast, individual compilation of Psipred and the executable of Disopred are required for the package. 
 
 ## How To Run, Basics
 
@@ -102,15 +111,7 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
-##Installation from Repository
-[Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
-- Blast, individual compilation of Psipred and the executable of Disopred are required for the package. 
-```shell
-cd 
-git clone https://github.com/Rostlab/MetaDisorder
-cd MetaDisorder
-perl runMD.pl fasta=tmdfast.fasta
-```
+
 ###Environment
 
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
