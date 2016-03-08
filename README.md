@@ -21,7 +21,7 @@ perl runMD.pl fasta=tmdfast.fasta
 [Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
 - Blast, individual compilation of Psipred and the executable of Disopred are required for the package.
 - Blast installers and source code can be found "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/".
-- Compilation of Psipred:
+- Compilation of Psipred (There is a README file in the psipred folder):
 ```shell
 
 cd Metadisorder
@@ -32,8 +32,6 @@ make
 
 make install
 ```
-Place executables to a bin folder in the psipred folder.
-
 ## How To Run, Basics
 
 * **Usage:** metadisorder [OPTION]
