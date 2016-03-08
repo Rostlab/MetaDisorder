@@ -25,11 +25,8 @@ perl runMD.pl fasta=tmdfast.fasta
 ```shell
 
 cd Metadisorder
-
 cd Psipred
-
 make
-
 make install
 ```
 ## How To Run, Basics
