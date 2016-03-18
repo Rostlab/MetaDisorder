@@ -1,4 +1,5 @@
-#!/usr/local/bin/perl -w
+#!/usr/bin/perl -w
+use warnings;
 $id=$ARGV[0];$win=$ARGV[1];$work_dir=$ARGV[2];
 $fout="$work_dir/$id.ucon";
 $file="$work_dir/$id.eprofcon";
@@ -13,8 +14,6 @@ while ($line=<FILE>) {
 	push (@seq,$aa);push (@num,$num);push (@e,$e);#push (@hProb,$hProb/100);
 	}
 close (FILE);
-#$fout=$file;
-#$fout=~ s/\.eprofcon/\.ucon/;
 #print FOUT "num\taa\te_no_smooth\te_win$win\n";
 loop20:for ($i=0;$i<scalar@seq;$i++) {
 	$disorder[0][$i]= $disorder[1][$i]= $disorder[2][$i]= $disorder[3][$i]= $disorder[4][$i]='O';
@@ -29,6 +28,7 @@ loop30:	for ($j=$st;$j<=$en;$j++) {
 		${$count{$win}}[$i]++;
 		}
 	${$e_win{$win}}[$i]=${$sum_e{$win}}[$i]/${$count{$win}}[$i];
+	@e1=convert(\@{$e_win{$win}});
 	
 	########old conversion to "probability" values
 	
@@ -50,15 +50,7 @@ loop30:	for ($j=$st;$j<=$en;$j++) {
 #		}
 	#	$frac[$i]=helix_cont();
 	}
-@e1=convert(\@{$e_win{$win}});
 open (FOUT,">$fout") || die "cant open $fout";
-#printf FOUT "PFRMAT DR\n";
-#printf FOUT "TARGET %s\n",$name;
-#printf FOUT "AUTHOR XXXX-XXXXX-XXXX\n"; 
-#printf FOUT "REMARK The method predicts long disordered regions in proteins using\n";
-#printf FOUT "REMARK intra-chain contact prediction and energy potential\n";
-#printf FOUT "REMARK \n";
-#printf FOUT "METHOD Ucon: prediction of natively unstructured regions in proteins through contacts prediction\n";
 printf FOUT "number\taa\te_win$win\tscore\n";
 for ($i=0;$i<scalar@seq;$i++) {
 	$res_num=$i+1;

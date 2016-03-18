@@ -11,20 +11,21 @@ $fasta=$root ."/". $id .".f";
 $hsspfil=$root ."/".$id."-fil.hssp";
 $file1= $root ."/"."prof/"."$id-fil.rdbProf";
 $saf=$root ."/".$id.".saf";
+#$hssp=$root ."/" .$id".hssp";
 $hssp=$root ."/".$id.".hssp";
+#$blastpgp=$root .$id .".blastpgp";;
 $blastpgp=$root ."/".$id .".blastpgp";;
 $chk=$root ."/".$id .".chk";;
-warn ("$blast_dir/blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
-system ("$blast_dir/blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 
-warn (" $ENV{'HOME'}/server/pub/prof/scr/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
-system ("perl $ENV{'HOME'}/server/pub/prof/scr/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
-warn  ("perl $ENV{'HOME'}/server/pub/prof/scr/copf.pl exeConvertSeq=$ENV{'HOME'}/server/pub/prof/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");
-system ("perl $ENV{'HOME'}/server/pub/prof/scr/copf.pl exeConvertSeq=$ENV{'HOME'}/server/pub/prof/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");
+warn ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
+system ("$blast_dir ./blastpgp -i $fasta -j 3 -d /data/blast/big -o $blastpgp -C $chk");
 
-system ("perl $ENV{'HOME'}/server/pub/prof/scr/hssp_filter.pl $hssp red=80 fileOut=$hsspfil");
-
-
+#Those directories should point lib-utils folder in the project
+warn (" perl librg-utils-perl/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
+system ("perl librg-utils-perl/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
+warn  ("perl librg-utils-perl/copf.pl exeConvertSeq=$ENVperl librg-utils-perl/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");
+system ("perl librg-utils-perl/copf.pl exeConvertSeq=$ENV{'HOME'}/server/pub/prof/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");
+system ("perl librg-utils-perl/hssp_filter.pl $hssp red=80 fileOut=$hsspfil");
 
 # system ("perl /nfs/home1/pub/molbio/perl/blast2saf.pl $blastpgp maxAli=3000 eSaf=1 saf=$saf");
 # system ("/usr/pub/molbio/prof/scr/copf.pl exeConvertSeq=/usr/pub/molbio/prof/bin/convert_seq_big.LINUX $saf hssp fileOut=$hssp");

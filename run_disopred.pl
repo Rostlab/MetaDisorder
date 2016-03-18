@@ -17,7 +17,7 @@ $file=$work_dir. "/" . $fileroot . ".f";
 #system ("$root/psipred/rundisopred-input-path2 $file $root");
 $chk=$work_dir."/"."$fileroot.chk"; ### if check file is provided
 #system ("$root/psipred/rundisopred-input-path2-chk $file $root $chk $blast_dir"); ### if check file is provided
-warn ("$root/psipred/rundisopred-input-path2-chk2 $file $root $chk $blast_dir $work_dir"); ### if check file is provided
+#warn ("$root/psipred/rundisopred-input-path2-chk2 $file $root $chk $blast_dir $work_dir"); ### if check file is provided
 system ("$root/psipred/rundisopred-input-path2-chk2 $file $root $chk $blast_dir $work_dir"); ### if check file is provided
 #$diso="$root/" . $fileroot . ".diso";
 #system ("mv $diso $file2");

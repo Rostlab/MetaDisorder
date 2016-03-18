@@ -1,0 +1,105 @@
+HSSP       HOMOLOGY DERIVED SECONDARY STRUCTURE OF PROTEINS , VERSION 1.0 1991
+PDBID      query
+DATE       file generated on 22-Mar-10
+SEQBASE    COPF-tmp11892.msf_tmp
+PARAMETER  CONVERTSEQ of query
+THRESHOLD  according to: ALL
+REFERENCE  Sander C., Schneider R. : Database of homology-derived protein structures. Proteins, 9:56-68 (1991).
+CONTACT    e-mail (INTERNET) Schneider@EMBL-Heidelberg.DE or Sander@EMBL-Heidelberg.DE / fax +49-6221-387306
+AVAILABLE  Free academic use. Commercial users must apply for license.
+AVAILABLE  No inclusion in other databanks without permission.
+HEADER     
+COMPND     
+SOURCE     
+AUTHOR     
+SEQLENGTH    23
+NCHAIN        1 chain(s) in query data set
+NALIGN        8
+NOTATION : ID: EMBL/SWISSPROT identifier of the aligned (homologous) protein
+NOTATION : STRID: if the 3-D structure of the aligned protein is known, then STRID is the Protein Data Bank identifier as taken
+NOTATION : from the database reference or DR-line of the EMBL/SWISSPROT entry
+NOTATION : %IDE: percentage of residue identity of the alignment
+NOTATION : %SIM (%WSIM):  (weighted) similarity of the alignment
+NOTATION : IFIR/ILAS: first and last residue of the alignment in the test sequence
+NOTATION : JFIR/JLAS: first and last residue of the alignment in the alignend protein
+NOTATION : LALI: length of the alignment excluding insertions and deletions
+NOTATION : NGAP: number of insertions and deletions in the alignment
+NOTATION : LGAP: total length of all insertions and deletions
+NOTATION : LSEQ2: length of the entire sequence of the aligned protein
+NOTATION : ACCESSION: SwissProt accession number
+NOTATION : PROTEIN: one-line description of aligned protein
+NOTATION : SeqNo,PDBNo,AA,STRUCTURE,BP1,BP2,ACC: sequential and PDB residue numbers, amino acid (lower case = Cys), secondary
+NOTATION : structure, bridge partners, solvent exposure as in DSSP (Kabsch and Sander, Biopolymers 22, 2577-2637(1983)
+NOTATION : VAR: sequence variability on a scale of 0-100 as derived from the NALIGN alignments
+NOTATION : pair of lower case characters (AvaK) in the alignend sequence bracket a point of INSERTION IN THIS sequence
+NOTATION : dots (....) in the alignend SEQUENCE INDICATE POINTS of deletion in this sequence
+NOTATION : SEQUENCE PROFILE: relative frequency of an amino acid type at each position. Asx and Glx are in their
+NOTATION : acid/amide form in proportion to their database frequencies
+NOTATION : NOCC: number of aligned sequences spanning this position (including the test sequence)
+NOTATION : NDEL: number of sequences with a deletion in the test protein at this position
+NOTATION : NINS: number of sequences with an insertion in the test protein at this position
+NOTATION : ENTROPY: entropy measure of sequence variability at this position
+NOTATION : RELENT: relative entropy, i.e.  entropy normalized to the range 0-100
+NOTATION : WEIGHT: conservation weight
+
+## PROTEINS : EMBL/SWISSPROT identifier and alignment statistics
+  NR.    ID         STRID   %IDE  %SIM IFIR ILAS JFIR JLAS LALI NGAP LGAP LSEQ2 ACCESSION     PROTEIN
+    1 : A1B6G7_PARDP        0.96  0.00    1   23    1   23   23    0    0   23
+    2 : A4EQ92_9RHOB        0.74  0.00    1   23    1   23   23    0    0   23
+    3 : C7DCB0_9RHOB        0.74  0.00    1   23    1   23   23    0    0   23
+    4 : A6FPH8_9RHOB        0.74  0.00    1   23    1   23   23    0    0   23
+    5 : A3W093_9RHOB        0.61  0.00    1   23    1   23   23    0    0   23
+    6 : B5JBK0_9RHOB        0.70  0.00    1   23    1   23   23    0    0   23
+    7 : D0D6S5_9RHOB        0.61  0.00    1   23    1   23   23    0    0   23
+    8 : Q5ENE3_9CRUS        0.65  0.00    1   23    1   23   23    0    0   23
+## ALIGNMENTS    1 -    8
+ SeqNo  PDBNo AA STRUCTURE BP1 BP2  ACC NOCC  VAR  ....:....1....:....2....:....3....:....4....:....5....:....6....:....7
+     1    1   Y              0   0    0    9    0  YYYYYYYY
+     2    2   M              0   0    0    9    0  MMMMMMMM
+     3    3   C              0   0    0    9    0  CCCCCCCC
+     4    4   L              0   0    0    9    4  LMLLMLML
+     5    5   E              0   0    0    9    0  EEEEEEEE
+     6    6   G              0   0    0    9    0  GGGGGGGG
+     7    7   M              0   0    0    9   19  MAAAAAAA
+     8    8   R              0   0    0    9    7  RRRRRRRS
+     9    9   L              0   0    0    9    7  LFFFFLLL
+    10   10   V              0   0    0    9   30  VFITIFIL
+    11   11   A              0   0    0    9   18  AAAAAPPA
+    12   12   D              0   0    0    9   35  DDDASATS
+    13   13   A              0   0    0    9   24  AASADAAS
+    14   14   A              0   0    0    9   38  ASAAVLTV
+    15   15   A              0   0    0    9   30  AAAGASEE
+    16   16   E              0   0    0    9   24  EETEDENE
+    17   17   C              0   0    0    9    0  CCCCCCCC
+    18   18   T              0   0    0    9    0  TTTTTTTT
+    19   19   P              0   0    0    9    0  PPPPPPPP
+    20   20   N              0   0    0    9    0  NNNNNNNN
+    21   21   A              0   0    0    9    4  GGGGGGGG
+    22   22   H              0   0    0    9    0  HHHHHHHH
+    23   23   L              0   0    0    9    0  LLLLLLLL
+## SEQUENCE PROFILE AND ENTROPY
+ SeqNo PDBNo   V   L   I   M   F   W   Y   G   A   P   S   T   C   H   R   K   Q   E   N   D  NOCC NDEL NINS ENTROPY RELENT WEIGHT
+    1    1     0   0   0   0   0   0 100   0   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+    2    2     0   0   0 100   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+    3    3     0   0   0   0   0   0   0   0   0   0   0   0 100   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+    4    4     0  67   0  33   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.637     29  1.13
+    5    5     0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 100   0   0     9    0    0   0.000      0  1.21
+    6    6     0   0   0   0   0   0   0 100   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+    7    7     0   0   0  22   0   0   0   0  78   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.530     24  0.78
+    8    8     0   0   0   0   0   0   0   0   0   0  11   0   0   0  89   0   0   0   0   0     9    0    0   0.349     16  0.96
+    9    9     0  56   0   0  44   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.687     31  1.09
+   10   10    22  11  33   0  22   0   0   0   0   0   0  11   0   0   0   0   0   0   0   0     9    0    0   1.523     69  0.66
+   11   11     0   0   0   0   0   0   0   0  78  22   0   0   0   0   0   0   0   0   0   0     9    0    0   0.530     24  0.90
+   12   12     0   0   0   0   0   0   0   0  22   0  22  11   0   0   0   0   0   0   0  44     9    0    0   1.273     58  0.49
+   13   13     0   0   0   0   0   0   0   0  67   0  22   0   0   0   0   0   0   0   0  11     9    0    0   0.849     39  0.73
+   14   14    22  11   0   0   0   0   0   0  44   0  11  11   0   0   0   0   0   0   0   0     9    0    0   1.427     65  0.44
+   15   15     0   0   0   0   0   0   0  11  56   0  11   0   0   0   0   0   0  22   0   0     9    0    0   1.149     52  0.64
+   16   16     0   0   0   0   0   0   0   0   0   0   0  11   0   0   0   0   0  67  11  11     9    0    0   1.003     46  0.79
+   17   17     0   0   0   0   0   0   0   0   0   0   0   0 100   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+   18   18     0   0   0   0   0   0   0   0   0   0   0 100   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+   19   19     0   0   0   0   0   0   0   0   0 100   0   0   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+   20   20     0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 100   0     9    0    0   0.000      0  1.21
+   21   21     0   0   0   0   0   0   0  89  11   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.349     16  1.08
+   22   22     0   0   0   0   0   0   0   0   0   0   0   0   0 100   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+   23   23     0 100   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     9    0    0   0.000      0  1.21
+//

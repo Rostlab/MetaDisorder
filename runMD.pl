@@ -1,8 +1,12 @@
 #!/usr/bin/perl -w
 ##!!!!!!!!!!!!!!!!!UPDATE JUCTION FILE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 use Cwd;
+use Env;
 use File::Copy;
 print_help()                 if ($#ARGV<0 || $ARGV[0]=~/^(-h|help|\?|def)$/i);
+
+$ENV{PP_MD}="~/MetaDisorder";
+$ENV{PP_BIN}="~/MetaDisorder/blast-2.2.25/bin";
 
 foreach $arg (@ARGV){
         #if    ($arg=~/^blast=(.*)$/)             { $fileInBlast =        $1;}
@@ -13,7 +17,7 @@ foreach $arg (@ARGV){
 	elsif ($arg=~/^profbval_raw=(.*)$/)                    { $fileProfbval  =         $1;}
 	elsif ($arg=~/^norsnet=(.*)$/)                  { $fileNors      =         $1;}
 	elsif ($arg=~/^profcon=(.*)$/)                  { $fileProfcon      =         $1;}
-#	elsif ($arg=~/^ucon=(.*)$/)               { $fileUcon =        $1;} ### no need to take from the server. this program process PROFcon and run Ucon from the PROFcon file!
+	elsif ($arg=~/^ucon=(.*)$/)               { $fileUcon =        $1;} ### no need to take from the server. this program process PROFcon and run Ucon from the PROFcon file!
 	elsif ($arg=~/^chk=(.*)$/)               { $fileChk =        $1;}
 	elsif ($arg=~/^md_dir=(.*)$/)               { $root_dir =        $1;} ## md directory will be called root from now on. tmp and bin directories will be within root
 	elsif ($arg=~/^servers=(.*)$/)               { $print_servers =        $1;}
@@ -32,13 +36,14 @@ if (!defined$file) {
 	}
 @orla=split(/\//,$file) ;
 if (!defined$root_dir) {
-	$root=$ENV{PP_MD}||$ENV{PP_PUB}."/md";
+	$root=$ENV{PP_MD}||$ENV{PP_PUB};
+	
 	}
 else {
 	$root=$root_dir;
 	}
 if (!defined$dirBlast) {
-    $blast_dir=$ENV{PP_BIN}."/blast";
+    $blast_dir=$ENV{PP_BIN};
         }
 else {
         $blast_dir=$dirBlast;
@@ -66,8 +71,8 @@ $win_acc=1;
 $win_sec=1;
 $ON= 2;
 #$tmp=$root . "/tmp";
-#$work_dir="." 
-$work_dir="$root";## for server
+$work_dir=".";
+#$work_dir="$root";## for server
 $nn=$root . "/nn_files";
 $rand_num=int(rand(10000000)); $rand_num= "tmpMD".$rand_num;
 $id= $rand_num;
@@ -92,6 +97,7 @@ open (LOG, ">$log_file") || die "cant open log file $!";
 if ((!defined$fileHssp)&&(!defined$fileChk)) {
 	print LOG "######### running blast for $id; creating new HSSP and chk files########\n";
 	$run_psi= "perl $root/run_psi.pl";
+	
 	system ("$run_psi $id $work_dir $blast_dir");
 	}
 else {
@@ -114,7 +120,9 @@ else {
 if (!defined$diso) {
 	print LOG " ######### running disopred for $id ########\n";
 	$run_disopred= "perl $root/run_disopred.pl";
-	system ("$run_disopred $id $work_dir $root $blast_dir");
+	$blast_dir2 = "$root/blast-2.2.25/bin";
+	
+	system ("$run_disopred $id $work_dir $root $blast_dir2");
 	}
 else {
 	error_file($diso);	
@@ -144,40 +152,41 @@ else {
 	}
 if (!defined$fileProfcon) {
         print LOG " ######### running profcon for $id ########\n";
-        $run_profcon= "perl $root/run_profcon.pl";
-        system ("$run_profcon $id $work_dir $work_dir $root");
-        $run_ucon_only= "perl $root/run_ucon_only.pl";
-        system ("$run_ucon_only $id $work_dir $work_dir $root");
-        $run_ucon_only_prob05= "perl $root/run_ucon_only_prob05.pl";
-        system ("$run_ucon_only_prob05 $id $work_dir $work_dir $root");	
-        print LOG " ######### running ucon using Profcon for $id ########\n";
+       # $run_profcon= "perl $root/run_profcon.pl";
+       # system ("$run_profcon $id $work_dir $work_dir $root");
+       # $run_ucon_only= "perl $root/run_ucon_only.pl";
+        #system ("$run_ucon_only $id $work_dir $work_dir $root");
+        #$run_ucon_only_prob05= "perl $root/run_ucon_only_prob05.pl";
+        #system ("$run_ucon_only_prob05 $id $work_dir $work_dir $root");	
+        #print LOG " ######### running ucon using Profcon for $id ########\n";
         $run_ucon= "perl $root/run_ucon.pl";
+	
         system ("$run_ucon $id $work_dir $root");       
 	 }
 else {
         error_file($fileProfcon);
         print LOG "profcon file exists copying $fileProfcon $profcon_file\n";
         system ("cp $fileProfcon $profcon_file");
-        $run_ucon_only= "perl $root/run_ucon_only.pl";
-        system ("$run_ucon_only $id $work_dir $work_dir $root");
-        $run_ucon_only_prob05= "perl $root/run_ucon_only_prob05.pl";
-        system ("$run_ucon_only_prob05 $id $work_dir $work_dir $root");
+        #$run_ucon_only= "perl $root/run_ucon_only.pl";
+        #system ("$run_ucon_only $id $work_dir $work_dir $root");
+        #$run_ucon_only_prob05= "perl $root/run_ucon_only_prob05.pl";
+        #system ("$run_ucon_only_prob05 $id $work_dir $work_dir $root");
         print LOG " ######### running ucon using Profcon for $id ########\n";
         $run_ucon= "perl $root/run_ucon.pl";
         system ("$run_ucon $id $work_dir $root");
-        }
-#if (!defined$fileUcon) { ######## combined this condition with the PROFcon one. May 2008
-#	print LOG " ######### running ucon using Profcon for $id ########\n";
-#	$run_ucon= "perl $root/run_ucon.pl";
-#	system ("$run_ucon $id $work_dir $root");
-#	}
-#else {
-#	error_file($fileUcon);
-#	print LOG "ucon exists copying $fileUcon $ucon_file\n";
-#	system ("cp $fileUcon $ucon_file");
-#	}
+       }
+if (!defined$fileUcon) { ######## combined this condition with the PROFcon one. May 2008
+	print LOG " ######### running ucon using Profcon for $id ########\n";
+	$run_ucon= "perl $root/run_ucon.pl";
+	system ("$run_ucon $id $work_dir $root");
+	}
+else {
+	error_file($fileUcon);
+	print LOG "ucon exists copying $fileUcon $ucon_file\n";
+	system ("cp $fileUcon $ucon_file");
+	}
 
-#copy_server_files();
+copy_server_files();
 print "### getting all the data from DISOPRED2 #####\n";
 get_disopred($disopred_file);
 print "### getting all the data from PROFbval #####\n";
@@ -186,13 +195,13 @@ print "### getting all the data from NORSnet #####\n";
 get_nors($norsnet_file);
 print "### getting all the data from Ucon #####\n";
 get_ucon($ucon_file);
-print "### getting all the data from contacts only #####\n";
-get_ucon_only($ucon_only_file);
-print "### getting all the data from high probability contacts only #####\n";
-get_ucon_only_prob05($ucon_only_prob05_file);
+#print "### getting all the data from contacts only #####\n";
+#get_ucon_only($ucon_only_file);
+#print "### getting all the data from high probability contacts only #####\n";
+#get_ucon_only_prob05($ucon_only_prob05_file);
 
 
-#print "### getting all the data from Ucon #####\n"; ####### These are used in MD vesrion that does not use PROFcon
+print "### getting all the data from Ucon #####\n"; ####### These are used in MD vesrion that does not use PROFcon
 #get_ucon_random($ucon_file);			     ####### These are used in MD vesrion that does not use PROFcon
 
 
@@ -214,7 +223,7 @@ undef @secC;  $lengthA=$lengthB=$lengthC=0;undef $hydroNet;undef @A;undef @C;und
 foreach $aa (@aa) {
 	$c{$aa}=0;
 	}
-open (FILE, "$file") || die "tinofet $root/DataFiles/$file $!";
+open (FILE, "$file") || die "tinofet $root/DataFiles/$file";
 <FILE>;
 while ($line=<FILE>)  {
 	@stuff=split(' ', $line);
@@ -230,7 +239,7 @@ while ($line=<FILE>)  {
 	}
 close(FILE);
 foreach $aa (@aa) {
-	$c{$aa}=$c{$aa}/(scalar@res)*100;
+	#$c{$aa}=$c{$aa}/(scalar@res)*100;
 	use integer;
 	$c{$aa}=$c{$aa}*1;
 	no integer;
@@ -346,9 +355,9 @@ print FOUT "FILEOUT_JCT           : $jct_crp\n";
 print FOUT "FILEOUT_ERR           : $NNo_tst_err\n";
 print FOUT "FILEOUT_YEAH          : $NNo_yeah\n";
 print FOUT "//\n";
-system ("$nn/NetRun6.LINUX $parvalid");
+#system ("$nn/NetRun6.LINUX $parvalid");
 close(FILE);
-if ( -e  $validOutFile ) {
+#if ( -e  $validOutFile ) {
 	open (LOG, ">>$log_file") || die "cant open log file $!";
     	print LOG "Meydey ran successfully. removing temporary files: $fasta $prof_file $hsspfil_file $file $inValid $inOutValid $parvalid $jct_crp $NNo_tst_err $NNo_yeah\n";
 	close(LOG);
@@ -357,7 +366,7 @@ if ( -e  $validOutFile ) {
 		}
 	system ("rm $fasta $file $prof_file $hsspfil_file $inValid $inOutValid $parvalid $jct_crp $NNo_tst_err $NNo_yeah");
 	print "parcing the results\n";
-	get_md($validOutFile);
+#	get_md($validOutFile);
 	 get_rel();
 	create_final();
         if (defined$fileOut) {
@@ -368,10 +377,10 @@ if ( -e  $validOutFile ) {
                 print "\nfinal output is in $fout\n";
                 }
 	system ("rm $log_file");
-	}
-else {
-	print "$validOutFile doesnt exist!!!\n";
-	}
+#	}
+#else {
+#	print "$validOutFile doesnt exist!!!\n";
+#	}
 #=========================================================================================================================================================
 sub print_help {
     if ($#ARGV<0 ||			# help
@@ -690,7 +699,7 @@ sub get_profbval {
 	my $num;my $node1;my $node2;my $muka;my $twostate;
        if (!(open (FILE, "$file"))) {
        		print "cant open $file killing the job$!";
-		rm_files($id);
+		#rm_files($id);
 		die;
 		}
 	for ($f=0; $f<43; $f++)  {
@@ -713,7 +722,7 @@ loop58:	while ($line=<FILE>)  {
 		}
 	close (FILE);
 	}
-#sub get_ucon {
+sub get_ucon {
 #	my @moogla;my $file; my $num;my $prob;my $val; my $line;
 #	$file=$id.".ucon";
 #       	open (FILE, "$root/ucon2/$file") || die "$root/ucon/$file no siyut ahhhhhhhhhh $!";
@@ -800,7 +809,8 @@ sub sec_cont {
 		$sum{'H'}= $sum{'H'}+$otH[$j];
                 }
         foreach $sec (@sec) {
-                $compo{$sec}=int(($sum{$sec}/$length));
+                #$compo{$sec}=int(($sum{$sec}/$length));
+		$compo{$sec}=int(($sum{$sec}));
                 push (@array, $compo{$sec});
                 }
         return @array;
@@ -1000,7 +1010,7 @@ sub error_file {
 		}
 	}	
 sub create_final {
-	$fout= "$root/" . "$fileroot.md";
+	$fout= "$fileroot.md";
 	#$fout= "./" . "$fileroot.md";
 	open (FOUT, ">$fout") || die "cant open  $fout";
 	if ($mode_out==0) {
@@ -1036,6 +1046,7 @@ sub create_final {
                 #print FOUT "num\taa\tNORSnet\tNORSnet2st\tPROFbval\tPROFbval2st\tUcon\tUcon2st\tMD\tMD2st\n";
            printf FOUT '%s %s %s %s %s %s %s %s %s %s %s',"Number","Residue","NORSnet","NORS2st","PROFbval","bval2st","Ucon","Ucon2st","MD_raw "," MD_rel"," MD2st ";
 		print FOUT "\n";
+		
 		for ($i=0;$i<scalar@res;$i++) {
                         $num=$i+1;
                        printf FOUT "%5d\t%s\t%1.2f\t%s\t%1.2f\t%s\t%1.2f\t%s\t%1.3f\t%d\t%s\n",$num,$res[$i],${$nors_raw{$id}}[$i],${$nors2states{$id}}[$i],${$profbval_prob{$id}}[$i], ${$profbval2_states{$id}}[$i],${$ucon_prob{$id}}[$i],${$ucon2_states{$id}}[$i],$pred[$i],$md_rel[$i],${$md2states{$id}}[$i];                        
@@ -1112,6 +1123,7 @@ sub get_rel {
                   push (@md_rel, $rel);
                 }
         }
+}
 
 
 
