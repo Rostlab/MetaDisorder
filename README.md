@@ -11,17 +11,20 @@ sudo apt-get install rostlab-debian-keyring # without verification
 sudo apt-get update
 sudo apt-get install metadisorder
 ```
-or 
+or
+
 ```shell
-cd 
+cd
 git clone https://github.com/Rostlab/MetaDisorder
 cd MetaDisorder
 perl runMD.pl fasta=tmdfast.fasta
 ```
+
 [Warning] the source code includes many dependency and local directory, some of which might require installation/alteration. For the convenience, clone it to the "home directory".
 - Blast, individual compilation of Psipred and the executable of Disopred are required for the package.
 - Blast installers and source code can be found "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/".
 - Compilation of Psipred (There is a README file in the psipred folder):
+
 ```shell
 
 cd Metadisorder
@@ -29,6 +32,7 @@ cd Psipred
 make
 make install
 ```
+
 ## How To Run, Basics
 
 * **Usage:** metadisorder [OPTION]
@@ -119,7 +123,6 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
         workdir
          Work directory, optional. If not defined a temporary directory is used.
 
-
 ###Environment
 
 * **METADISORDERCONF** - location of metadisorderrc configuration file to use overriding other configuration files
@@ -131,7 +134,7 @@ https://bio.tools/tool/mytum.de/MetaDisorder/1
 
 ##Training
 MetaDisorder uses DisProt 3.4, which contains:
-460 IDPs (intrinsically disordered proteins) 
+460 IDPs (intrinsically disordered proteins)
 1103 disordered regions, encompassing 35 functional categories (all based on published experimental data)
 
 60 proteins with >780 residues were discarded as these could not be handled by all of the methods tested. From the remaining set, 17 more proteins crashed when applying at least one of the predictors in this study, and were also discarded.
